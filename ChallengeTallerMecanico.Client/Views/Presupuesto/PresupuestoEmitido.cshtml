@@ -1,0 +1,45 @@
+﻿@using ChallengeTallerMecanico.Application.Dto;
+@model PresupuestoDto
+@{
+    ViewData["Title"] = "Presupuesto Emitido";
+}
+
+<h1>Presupuesto Emitido</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Cliente</th>
+            <th>Vehículo</th>
+            <th>Desperfectos</th>
+            <th>Repuestos</th>
+            <th>Total</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>@Model.Id</td>
+            <td>@Model.Cliente.Nombre - @Model.Cliente.Apellido</td>
+            <td>@Model.Vehiculo.Marca - @Model.Vehiculo.Modelo</td>
+            <td>
+                <ul>
+                    @foreach (var desperfecto in Model.Desperfectos)
+                    {
+                        <li>@desperfecto.Descripcion</li>
+                    }
+                </ul>
+            </td>
+            <td>
+                @{
+                    foreach (var desperfecto in Model.Desperfectos)
+                    {
+                        var repuestos = string.Join(", ", desperfecto.Repuestos.Select(d => d.Nombre));
+                        @repuestos
+                    }
+                }
+            </td>
+            <td>$ @Model.Total</td>
+        </tr>
+    </tbody>
+</table>

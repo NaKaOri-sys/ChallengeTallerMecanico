@@ -1,0 +1,13 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs
+/ChallengeTallerMecanico.API/bin/Debug/net6.0
+/ChallengeTallerMecanico.API/obj
+/ChallengeTallerMecanico.Application/bin/Debug/net6.0
+/ChallengeTallerMecanico.Application/obj
+/ChallengeTallerMecanico.Client/bin/Debug/net6.0
+/ChallengeTallerMecanico.Client/obj
+/ChallengeTallerMecanico.DataAccess/bin/Debug/net6.0
+/ChallengeTallerMecanico.DataAccess/obj

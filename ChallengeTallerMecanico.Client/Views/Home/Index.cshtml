@@ -1,0 +1,57 @@
+﻿@using ChallengeTallerMecanico.Application.Enums;
+@{
+    ViewData["Title"] = "Ingreso Vehiculo";
+}
+@model VehiculoVM
+
+<h2>Ingreso de Autos</h2>
+
+@using (Html.BeginForm("IngresarVehiculo", "Home", FormMethod.Post, new { @class = "form", id = "form-vehiculo" }))
+{
+    <div class="row">
+        <div class="form-group col-md-6">
+            @Html.LabelFor(model => model.Marca)
+            @Html.TextBoxFor(model => model.Marca, new { @class = "form-control", required = "required", id = "marca" })
+        </div>
+
+        <div class="form-group col-md-6">
+            @Html.LabelFor(model => model.Modelo)
+            @Html.TextBoxFor(model => model.Modelo, new { @class = "form-control", required = "required", id = "modelo" })
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="form-group col-md-6">
+            @Html.LabelFor(model => model.Patente)
+            @Html.TextBoxFor(model => model.Patente, new { @class = "form-control", required = "required", id = "patente" })
+        </div>
+
+        <div class="form-group col-md-6">
+            @Html.LabelFor(model => model.Tipo)
+            @Html.DropDownListFor(model => model.Tipo, new SelectList(Enum.GetValues(typeof(TipoVehiculoEnum))), "Seleccione", new { @class = "form-control", @id = "tipoVehiculo", required = "required" })
+        </div>
+    </div>
+
+    <div id="camposAdicionales" style="display: none;">
+        <div class="row">
+            <div class="form-group col-md-6" id="cantidadPuertas">
+                @Html.LabelFor(model => model.CantidadPuertas)
+                @Html.TextBoxFor(model => model.CantidadPuertas, new { @class = "form-control", required = "required", data_rule_camposAdicionalesRequeridos = "true", id = "CantidadPuertas" })
+            </div>
+
+            <div class="form-group col-md-6" id="tipoAuto">
+                @Html.LabelFor(model => model.TipoAuto)
+                @Html.DropDownListFor(model => model.TipoAuto, new SelectList(Enum.GetValues(typeof(TipoAutomovilEnum))), "Seleccione", new{ @class = "form-control", required = "required", data_rule_camposAdicionalesRequeridos = "true", id = "TipoAuto" })
+            </div>
+        </div>
+        <div class="form-group" id="cilindrada">
+            @Html.LabelFor(model => model.Cilindrada)
+            @Html.TextBoxFor(model => model.Cilindrada, new { @class = "form-control", required = "required", data_rule_camposAdicionalesRequeridos = "true", id = "Cilindrada" })
+        </div>
+    </div>
+
+    <button type="submit" id="btn-save" class="btn btn-primary">Guardar</button>
+}
+<script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+<script src="~/lib/jquery-validation/dist/additional-methods.min.js"></script>
+<script src="~/js/Home.js"></script>

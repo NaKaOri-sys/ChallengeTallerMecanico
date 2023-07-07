@@ -1,0 +1,64 @@
+﻿@model PresupuestoVM
+@{
+    ViewData["Title"] = "Presupuestos";
+}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.14.0/css/bootstrap-select.min.css" />
+
+
+<h1>Presupuestos</h1>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <form>
+                <div class="form-group">
+                    <select id="clientes" name="clienteSeleccionado" class="form-control" required>
+                        <option value="">Clientes</option>
+                        @foreach (var cliente in Model.Clientes)
+                        {
+                            <option value="@cliente.Id" data-idCliente="@cliente.Id">@cliente.Nombre - @cliente.Apellido - @cliente.Email</option>
+                        }
+                    </select>
+                </div>
+                <div class="form-group">
+                    <select id="vehiculos" name="vehiculoSeleccionado" class="form-control" required>
+                        <option value="">Vehiculos</option>
+                        @foreach (var vehiculo in Model.Vehiculos)
+                        {
+                            <option value="@vehiculo.Id" data-idVehiculo="@vehiculo.Id">@vehiculo.Marca - @vehiculo.Modelo - @vehiculo.Patente</option>
+                        }
+                    </select>
+                </div>
+                <div class="form-group">
+                    <select id="desperfectos" name="desperfectosSeleccionados" class="form-control selectpicker" multiple required>
+                        <option value="" disabled>Desperfectos</option>
+                        @{
+                            var desperfectosUnicos = Model.Desperfectos.GroupBy(d => d.Id).Select(g => g.First()).ToList();
+                            @foreach (var desperfecto in desperfectosUnicos)
+                            {
+                                <option value="@desperfecto.Id" data-idDesperfecto="@desperfecto.Id">@desperfecto.Descripcion</option>
+                            }
+                        }
+                    </select>
+                </div>
+                <button id="agregarDesperfecto" type="button" class="btn btn-primary">Agregar Desperfecto</button>
+                <button id="send-btn" type="button" class="btn btn-success">Enviar</button>
+            </form>
+        </div>
+    </div>
+</div>
+<table id="tablaDesperfectos" class="table">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Descripción</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        <!-- Aquí se agregarán los registros de desperfectos -->
+    </tbody>
+</table>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.14.0-beta3/dist/js/bootstrap-select.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.14.0-beta3/dist/js/i18n/defaults-*.min.js"></script>
+<script src="~/js/Presupuesto.js"></script>
